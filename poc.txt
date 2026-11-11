@@ -1,0 +1,2 @@
+http://127.0.0.1/vulnerabilities/xss_r/?name=%3Cscript%3Ealert%281%29%3C%2Fscript%3E
+<script>alert(1)</script>
